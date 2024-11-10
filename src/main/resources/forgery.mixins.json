@@ -1,0 +1,11 @@
+{
+	"required": true,
+	"package": "dev.williamknowleskellett.forgery.mixin",
+	"compatibilityLevel": "JAVA_16",
+	"mixins": [
+		"ExampleMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
