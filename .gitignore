@@ -1,9 +1,9 @@
 # gradle
 
-.gradle/
-build/
-out/
-classes/
+/.gradle/
+/build/
+/out/
+/classes/
 
 # eclipse
 
@@ -11,18 +11,18 @@ classes/
 
 # idea
 
-.idea/
+/.idea/
 *.iml
 *.ipr
 *.iws
 
 # vscode
 
-.settings/
-.vscode/
-bin/
-.classpath
-.project
+/.settings/
+/.vscode/
+/bin/
+/.classpath
+/.project
 
 # macos
 
@@ -30,7 +30,9 @@ bin/
 
 # fabric
 
-run/
+/run/
+/src/main/generated
+/remappedSrc
 
 # java
 
@@ -38,5 +40,3 @@ hs_err_*.log
 replay_*.log
 *.hprof
 *.jfr
-
-src/main/generated
