@@ -6,16 +6,19 @@ import net.minecraft.nbt.NbtCompound;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.recipe.SpecialCraftingRecipe;
 import net.minecraft.recipe.SpecialRecipeSerializer;
+import net.minecraft.recipe.book.CraftingRecipeCategory;
+import net.minecraft.registry.DynamicRegistryManager;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.collection.DefaultedList;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
 public class ForgeryRecipe extends SpecialCraftingRecipe {
-    public static final SpecialRecipeSerializer<ForgeryRecipe> RECIPE_SERIALIZER = Registry.register(Registry.RECIPE_SERIALIZER, new Identifier(Forgery.MOD_ID, "crafting_special_forgery"), new SpecialRecipeSerializer<>(ForgeryRecipe::new));
+    public static final SpecialRecipeSerializer<ForgeryRecipe> RECIPE_SERIALIZER = Registry.register(Registries.RECIPE_SERIALIZER, new Identifier(Forgery.MOD_ID, "crafting_special_forgery"), new SpecialRecipeSerializer<>(ForgeryRecipe::new));
 
-    public ForgeryRecipe(Identifier identifier) {
-        super(identifier);
+    public ForgeryRecipe(Identifier id, CraftingRecipeCategory category) {
+        super(id, category);
     }
 
     public static void initialize() {
@@ -49,12 +52,13 @@ public class ForgeryRecipe extends SpecialCraftingRecipe {
         return !originalItemIngredient.isEmpty() && !forgeryIngredientStack.isEmpty();
     }
 
-    public ItemStack craft(CraftingInventory craftingInventory) {
+    @Override
+    public ItemStack craft(CraftingInventory inventory, DynamicRegistryManager registryManager) {
         ItemStack forgeryResultStack = ItemStack.EMPTY;
         ItemStack originalItemIngredient = ItemStack.EMPTY;
 
-        for (int i = 0; i < craftingInventory.size(); ++i) {
-            ItemStack currentStack = craftingInventory.getStack(i);
+        for (int i = 0; i < inventory.size(); ++i) {
+            ItemStack currentStack = inventory.getStack(i);
             if (!currentStack.isEmpty()) {
                 if (currentStack.isOf(ForgeryItems.FORGERY) && forgeryResultStack.isEmpty()) {
                     NbtCompound nbt = currentStack.getNbt();
