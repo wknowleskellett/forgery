@@ -2,9 +2,9 @@ package dev.williamknowleskellett.forgery;
 
 import com.google.gson.JsonObject;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipesProvider;
+import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeJsonProvider;
-import net.minecraft.data.server.recipe.ShapelessRecipeJsonFactory;
+import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.RecipeSerializer;
 import net.minecraft.util.Identifier;
@@ -12,7 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class ForgeryRecipesProvider extends FabricRecipesProvider {
+public class ForgeryRecipesProvider extends FabricRecipeProvider {
 
     public ForgeryRecipesProvider(FabricDataGenerator dataGenerator) {
         super(dataGenerator);
@@ -41,7 +41,7 @@ public class ForgeryRecipesProvider extends FabricRecipesProvider {
                 return new Identifier("");
             }
         });
-        ShapelessRecipeJsonFactory.create(ForgeryItems.FORGERY, 1)
+        ShapelessRecipeJsonBuilder.create(ForgeryItems.FORGERY, 1)
                 .input(Items.RED_DYE)
                 .input(Items.ORANGE_DYE)
                 .input(Items.YELLOW_DYE)
